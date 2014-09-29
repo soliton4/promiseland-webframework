@@ -1,0 +1,29 @@
+{
+  "name": "promiseland-webframework",
+  "version": "0.1",
+  "author": {
+    "name": "Matthias Behrens",
+    "email": "matthias.behrens@gmail.com"
+  },
+  "description": "instant webserver for promiseland",
+  "main": "framework.js"
+  , "dependencies" : {
+    "promiseland" :  "0.0.12",
+    "express" :  "4.x",
+    "socket.io": "1.x"
+  },  
+  "keywords": [
+    "promiseland"
+    , "framework"
+    , "webserver"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soliton4/promiseland-webframework"
+  },
+  "license": "bsd",
+  "engines": {
+    "node": ">=0.10"
+  },
+  "readmeFilename": "README.md"
+}

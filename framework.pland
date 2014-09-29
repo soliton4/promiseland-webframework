@@ -1,0 +1,158 @@
+var express = require("express");
+var http = require("http");
+var fs = require("fs");
+var socketIo = require("socket.io");
+
+
+var htmlStr = "<html>
+  <head>
+    <!-- socket.io -->
+      <script src='/socket.io/socket.io.js'></script>
+    <!-- require -->
+      <script src='/requirejs/require.js'></script>
+    <script>
+      require.config({{requirejsconfig}});
+    </script>
+    
+    <script>
+      require(['frameworkClient/client'], function(){
+        {{require}};
+      });
+    </script>
+    
+  </head>
+  <body>
+  </body>
+</html>";
+
+class Framework {
+  constructor: (parConfig){
+    parConfig = parConfig || {};
+    
+    this.app = express();
+    
+    this.http = http.createServer(this.app);
+    this.config = parConfig;
+    var self = this;
+    
+    this.app.get("/", function(req, res){
+      res.setHeader('Content-Type', "text/html");
+      var s = htmlStr;
+      var loadStr = "";
+      if (self.config.load && self.config.load.length){
+        if (typeof self.config.load === "string"){
+          loadStr = "require(['" + self.config.load + "'], function(){});";
+        }else{
+          loadStr = "require([";
+          var i;
+          for(i = 0; i < self.config.load.length; ++i){
+            if (i){
+              loadStr += ", ";
+            };
+            loadStr += "'" + self.config.load[i] + "'";
+          };
+          loadStr += "], function(){});";
+        };
+      };
+      s = s.replace("{{require}}", loadStr);
+      
+      var requireConfig;
+      if (self.config.requireConfig){
+        requireConfig = self.config.requireConfig;
+      };
+      if (!requireConfig){
+        requireConfig = {};
+      };
+      if (!requireConfig.packages){
+        requireConfig.packages = [
+          {
+            name: 'promiseland',
+            main: 'promiseland',
+            location: 'promiseland'
+          }
+        ];
+      }else{
+        var i = 0;
+        var found = false;
+        for(i = 0; i < requireConfig.packages.length; ++i){
+          if (requireConfig.packages[i].name == "promiseland"){
+            found = true;
+            requireConfig.packages[i].main = "promiseland";
+            requireConfig.packages[i].location = "promiseland";
+          };
+        };
+        if (!found){
+          requireConfig.packages.push({
+            name: 'promiseland',
+            main: 'promiseland',
+            location: 'promiseland'
+          });
+        };
+      };
+      s = s.replace("{{requirejsconfig}}", JSON.stringify(requireConfig));
+      
+      res.end(s);
+    });
+    
+    this.app.use("/promiseland", express["static"](this.config.promiselandPathName || promiseland.getPromiselandPathName()));
+    this.app.use("/requirejs", express["static"](this.config.requirejsPathName || (__dirname + "/requirejs")));
+    this.app.use("/frameworkClient", express["static"](this.config.frameworkClientPathName || (__dirname + "/frameworkClient")));
+    
+    if (self.config.dirs){
+      for (i = 0; i < self.config.dirs.length; ++i){
+        var d = self.config.dirs[i];
+        this.app.use(d.client, express["static"](d.server));
+      };
+    };
+    
+    var ClientProfile = function() {
+      this.name = function(){
+        return "client";
+      };
+      this.connections = {};
+      this.find = function(parId){
+        return this.connections[parId];
+      };
+      var nextid = 1;
+      this.addConnection = function(connection){
+        var id = nextid;
+        nextid++;
+        this.connections[id] = connection;
+        this.emit("connection", connection);
+      };
+    };
+    ClientProfile.prototype = new promiseland.ProfileBaseClass();
+    
+    var clientProfile = new ClientProfile();
+    promiseland.addProfile(clientProfile);
+    this.clientProfile = clientProfile;
+    
+    var mainio = socketIo.listen(this.http);
+    mainio.on('connection', function (socket) {
+
+      var connection = new promiseland.ConnectionBaseClass();
+      connection.socket = socket;
+      socket.on("pl", function(data){
+        connection.emit("data", data);
+      });
+      connection.send = function(data){
+        socket.emit("pl", data);
+      };
+
+      clientProfile.addConnection(connection);
+      socket.on("disconnect", function(){
+        connection.emit("disconnect");
+      });
+      
+    });
+    this.socketio = mainio;
+    
+  },
+  
+  listen: (port){
+    return this.http.listen(port);
+  }
+  
+};
+
+return Framework;

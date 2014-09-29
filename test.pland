@@ -1,0 +1,13 @@
+try{
+  var Fw = require "./framework";
+  var fw = new Fw({
+    load: "test/test",
+    dirs: [{
+      client: "/test",
+      server: __dirname + "/test/"
+    }]
+  });
+  fw.listen(4001);
+}catch(e){
+  console.log(e);
+};
