@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "da776a884b826fc4c58b5260cf95f3a2" })){ return promiseland._getModule("da776a884b826fc4c58b5260cf95f3a2"); };
+    if (promiseland._hasModule({ hashStr: "589923e6af79674ac2a5d84dec949a92" })){ return promiseland._getModule("589923e6af79674ac2a5d84dec949a92"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "da776a884b826fc4c58b5260cf95f3a2", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "589923e6af79674ac2a5d84dec949a92", "module": PL$1, promising: true });
 var PL$24/*JSON*/;try{PL$24/*JSON*/ = JSON;}catch(e){};
 var PL$25/*promiseland*/;try{PL$25/*promiseland*/ = promiseland;}catch(e){};
 var PL$26/*__dirname*/;try{PL$26/*__dirname*/ = __dirname;}catch(e){};
@@ -178,6 +178,7 @@ this["app"]["use"](PL$27/*d*/["client"], PL$5/*express*/["static"](PL$27/*d*/["s
 ;
 };
 ;
+PL$25/*promiseland*/["set"]("profile", "server");;
 PL$28/*ClientProfile*/ = (function(){
 var PL$30/*nextid*/;
 ;

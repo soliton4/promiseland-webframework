@@ -1,6 +1,6 @@
 {
   "name": "promiseland-webframework",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Matthias Behrens",
     "email": "matthias.behrens@gmail.com"
@@ -8,10 +8,12 @@
   "description": "instant webserver for promiseland",
   "main": "framework.js"
   , "dependencies" : {
-    "promiseland" :  "0.0.12",
     "express" :  "4.x",
     "socket.io": "1.x"
-  },  
+  },
+  "peerDependencies": {
+    "promiseland" :  "0.0.12"
+  },
   "keywords": [
     "promiseland"
     , "framework"

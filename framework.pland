@@ -105,6 +105,8 @@ class Framework {
       };
     };
     
+    promiseland.set("profile", "server");
+    
     var ClientProfile = function() {
       this.name = function(){
         return "client";
