@@ -1,6 +1,6 @@
 {
   "name": "promiseland-webframework",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Matthias Behrens",
     "email": "matthias.behrens@gmail.com"
@@ -12,7 +12,7 @@
     "socket.io": "1.x"
   },
   "peerDependencies": {
-    "promiseland" :  "0.0.12"
+    "promiseland" :  "0.0.13"
   },
   "keywords": [
     "promiseland"
