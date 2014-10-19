@@ -65,9 +65,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "0f36dd33db385b18816f15e753f08734" })){ return promiseland._getModule("0f36dd33db385b18816f15e753f08734"); };
+    if (promiseland._hasModule({ hashStr: "4271a5758bf086dc28ae1192a546759f" })){ return promiseland._getModule("4271a5758bf086dc28ae1192a546759f"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "0f36dd33db385b18816f15e753f08734", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "4271a5758bf086dc28ae1192a546759f", "module": PL$1, promising: true });
 var PL$12/*__dirname*/;try{PL$12/*__dirname*/ = __dirname;}catch(e){};
 var PL$14/*console*/;try{PL$14/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
@@ -84,7 +84,8 @@ var PL$8 = function(e){ PL$6.resolve(e); };
 PL$7/*try catch*/(function(){__requireFun("./framework").then(PL$7/*try catch*/(function(PL$10){PL$9/*Fw*/ = PL$10;
 PL$11/*fw*/ = new PL$9/*Fw*/({"load": "test/test",
 "dirs": [{"client": "/test",
-"server": (PL$12/*__dirname*/ + "/test/")}]});
+"server": (PL$12/*__dirname*/ + "/test/")}],
+"css": ["x.css", "y.css"]});
 PL$11/*fw*/["listen"](4001);;
 PL$5.resolve();
 }), PL$8);

@@ -5,7 +5,8 @@ try{
     dirs: [{
       client: "/test",
       server: __dirname + "/test/"
-    }]
+    }],
+    css: ["x.css", "y.css"]
   });
   fw.listen(4001);
 }catch(e){

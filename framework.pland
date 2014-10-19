@@ -6,6 +6,7 @@ var socketIo = require("socket.io");
 
 var htmlStr = "<html>
   <head>
+    {{css}}
     <!-- socket.io -->
       <script src='/socket.io/socket.io.js'></script>
     <!-- require -->
@@ -38,6 +39,20 @@ class Framework {
     this.app.get("/", function(req, res){
       res.setHeader('Content-Type', "text/html");
       var s = htmlStr;
+      
+      var cssStr = "";
+      if (self.config.css && self.config.css.length){
+        if (typeof self.config.css === "string"){
+          cssStr = "<link type = \"text/css\" rel=\"stylesheet\" href=\"" + self.config.css + "\">";
+        }else{
+          var i;
+          for(i = 0; i < self.config.css.length; ++i){
+            cssStr += "<link type = \"text/css\" rel=\"stylesheet\" href=\"" + self.config.css[i] + "\">";
+          };
+        };
+      };
+      s = s.replace("{{css}}", cssStr);
+      
       var loadStr = "";
       if (self.config.load && self.config.load.length){
         if (typeof self.config.load === "string"){

@@ -15,7 +15,8 @@ you can of course use as many classical js modules as you want.
     dirs: [{
       client: "/app",
       server: __dirname + "/app/"
-    }]
+    }],
+    css: "mycssfile.css"
   });
   fw.listen(3000);
 ```  
@@ -45,6 +46,8 @@ the configuration options are:
     directories served to the client. express["static"] is used to serve them. each entry in the array is a object containing a "server" and a "client" property giving the path to the directory on each side.  
     3 predefined directories exist: /promiseland; /requirejs; /frameworkClient
     also socket.io defines its resource. pls refer to the socket.io docu.
+  - css
+    a string or a array of strings of the css files you want to load in your webapp
     
 the return value:  
   new Fw creates a object that contains the following properties:  
