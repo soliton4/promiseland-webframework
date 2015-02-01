@@ -43,7 +43,6 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
@@ -56,10 +55,10 @@ if (promiseland._hasModule({ hashStr: "1a0881092c56aee0bb9b047576f84fe3" })){ re
 var PL$2/*console*/;try{PL$2/*console*/ = console;}catch(e){};
 var PL$1 = (function(){
 "use strict";
-;
-PL$2/*console*/["log"]("test successful");;
-;
-})();
+
+  ;
+  PL$2/*console*/["log"]("test successful");
+  ;})();
 ;return PL$1;
 });
 })();

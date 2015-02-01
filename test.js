@@ -43,7 +43,6 @@
         return par2.apply(par2, args);
       });
     };
-    requireFun = require;
     
   }else{ // Plain browser env
     alert("not working out!");
@@ -72,32 +71,50 @@ var PL$12/*__dirname*/;try{PL$12/*__dirname*/ = __dirname;}catch(e){};
 var PL$14/*console*/;try{PL$14/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
 "use strict";
-var PL$3 = function(code){ return function(res){ try{code(res);}catch(e){ PL$1.reject(e); }; }; };
-var PL$4 = function(e){ PL$1.reject(e); };
+var PL$3/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$1.reject(e);
+    };
+  };
+};
+var PL$4/*catch rejected*/ = function(e){
+  PL$1.reject(e);
+};
 var PL$9/*Fw*/;
 var PL$11/*fw*/;
-PL$3(function(){;
-var PL$5 = new __Promise();
-var PL$6 = new __Promise();
-var PL$7/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.resolve(e); }; }; };
-var PL$8 = function(e){ PL$6.resolve(e); };
-PL$7/*try catch*/(function(){__requireFun("./framework").then(PL$7/*try catch*/(function(PL$10){PL$9/*Fw*/ = PL$10;
-PL$11/*fw*/ = new PL$9/*Fw*/({"load": "test/test",
-"dirs": [{"client": "/test",
-"server": (PL$12/*__dirname*/ + "/test/")}],
-"css": ["x.css", "y.css"]});
-PL$11/*fw*/["listen"](4001);;
-PL$5.resolve();
-}), PL$8);
-;})();
-PL$6.then(PL$3(function(PL$13/*e*/){PL$14/*console*/["log"](PL$13/*e*/);;
-PL$5.resolve();;
-}));
-PL$5.then(PL$3(function(){;
-;
-PL$1.resolve(); return;;
-}), PL$4)})();
-return PL$1;
+PL$3/*promiseland exception catcher*/(function(){
+
+  ;
+  var PL$5 = new __Promise();
+  var PL$6 = new __Promise();
+  var PL$7/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$6.resolve(e); }; }; };
+  var PL$8 = function(e){ PL$6.resolve(e); };
+  PL$7/*try catch*/(function(){
+    __requireFun("./framework").then(PL$7/*try catch*/(function(PL$10){PL$9/*Fw*/ = PL$10;
+    PL$11/*fw*/ = new PL$9/*Fw*/({
+      "load": "test/test",
+      "dirs": [
+        {
+          "client": "/test",
+          "server": (PL$12/*__dirname*/ + "/test/")
+        }
+      ],
+      "css": [
+        "x.css", 
+        "y.css"
+      ]
+    });
+    PL$11/*fw*/["listen"](4001);
+    PL$5.resolve();}), PL$8);
+  ;})();
+  PL$6.then(PL$3/*promiseland exception catcher*/(function(PL$13/*e*/){
+    PL$14/*console*/["log"](PL$13/*e*/);
+    PL$5.resolve();;}));
+  PL$5.then(PL$3/*promiseland exception catcher*/(function(){;
+  ;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/)
+})();return PL$1;
 })();
 ;;
 return PL$1});
