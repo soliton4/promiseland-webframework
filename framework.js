@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "456fe028cd7eb5f4b2e76889f112012a" })){ return promiseland._getModule("456fe028cd7eb5f4b2e76889f112012a"); };
+    if (promiseland._hasModule({ hashStr: "595a706f7e3325e608e7d186729994f4" })){ return promiseland._getModule("595a706f7e3325e608e7d186729994f4"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "456fe028cd7eb5f4b2e76889f112012a", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "595a706f7e3325e608e7d186729994f4", "module": PL$1, promising: true });
 var PL$34/*JSON*/;try{PL$34/*JSON*/ = JSON;}catch(e){};
 var PL$35/*promiseland*/;try{PL$35/*promiseland*/ = promiseland;}catch(e){};
 var PL$36/*__dirname*/;try{PL$36/*__dirname*/ = __dirname;}catch(e){};
@@ -91,7 +91,7 @@ var PL$11/*socketIo*/;
 var PL$13/*expressSession*/;
 var PL$15/*CookieParser*/;
 var PL$17/*htmlStr*/;
-var PL$49/*Framework*/;
+var PL$51/*Framework*/;
 PL$3/*promiseland exception catcher*/(function(){
 
   ;
@@ -102,7 +102,7 @@ PL$3/*promiseland exception catcher*/(function(){
   __requireFun("express-session").then(PL$3/*promiseland exception catcher*/(function(PL$14){PL$13/*expressSession*/ = PL$14;
   __requireFun("cookie-parser").then(PL$3/*promiseland exception catcher*/(function(PL$16){PL$15/*CookieParser*/ = PL$16;
   PL$17/*htmlStr*/ = "<html>\n  <head>\n    {{css}}\n    <!-- socket.io -->\n      <script src='/socket.io/socket.io.js'></script>\n    <!-- require -->\n      <script src='/requirejs/require.js'></script>\n    <script>\n      require.config({{requirejsconfig}});\n    </script>\n    \n    <script>\n      require(['frameworkClient/client'], function(client){\n        {{require}};\n        client.connectPs.then(function(){\n          {{requireconnect}}\n        });\n      });\n    </script>\n    \n  </head>\n  <body>\n  </body>\n</html>";
-  PL$49/*Framework*/ = (function(){var PL$18/*inherited*/ = {};
+  PL$51/*Framework*/ = (function(){var PL$18/*inherited*/ = {};
   var res = promiseland.createClass({
     "constructor": (function(PL$19/*parConfig*/){
     
@@ -263,6 +263,7 @@ PL$3/*promiseland exception catcher*/(function(){
       };
       ;
       PL$35/*promiseland*/["addLocalFrameName"]("server");
+      PL$35/*promiseland*/["addLocalFrameName"]("serverNoAuth");
       var PL$38/*ClientFrame*/ = (function(){var PL$39/*inherited*/ = {};
       var res = promiseland.createClass({
         "name": "client"
@@ -302,6 +303,10 @@ PL$3/*promiseland exception catcher*/(function(){
         PL$45/*console*/["log"]("Session: ", PL$42/*socket*/["handshake"]["session"]);
         var PL$46/*connection*/ = new PL$40/*clientFrame*/["ConnectionBaseClass"]();
         ;
+        if(PL$20/*self*/["config"]["requireAuth"]){
+          PL$46/*connection*/["restrictLocalFrames"] = true;
+        };
+        ;
         PL$46/*connection*/["send"] = (function(PL$47/*data*/){
         
           ;
@@ -318,17 +323,48 @@ PL$3/*promiseland exception catcher*/(function(){
           ;
           PL$46/*connection*/["data"](PL$47/*data*/);
           ;}));
+        var PL$48/*authConnection*/ = new PL$40/*clientFrame*/["ConnectionBaseClass"]();
+        ;
+        PL$48/*authConnection*/["restrictLocalFrames"] = true;
+        PL$48/*authConnection*/["addLocalFrameAccess"]("serverNoAuth");
+        PL$48/*authConnection*/["session"]["setAuth"] = (function(PL$49/*parIsAuth*/){
+        
+          ;
+          if(PL$49/*parIsAuth*/){
+            PL$46/*connection*/["addLocalFrameAccess"]("server");
+          }else{
+          PL$46/*connection*/["removeLocalFrameAccess"]("server");
+          };
+          ;
+          ;});
+        PL$45/*console*/["log"](PL$48/*authConnection*/["session"]);
+        PL$48/*authConnection*/["send"] = (function(PL$47/*data*/){
+        
+          ;
+          PL$42/*socket*/["emit"]("a", PL$47/*data*/);
+          ;});
+        PL$40/*clientFrame*/["newConnection"](PL$48/*authConnection*/);
+        PL$42/*socket*/["on"]("disconnect", (function(){
+        
+          ;
+          PL$48/*authConnection*/["disconnect"]();
+          ;}));
+        PL$42/*socket*/["on"]("a", (function(PL$47/*data*/){
+        
+          ;
+          PL$48/*authConnection*/["data"](PL$47/*data*/);
+          ;}));
         ;}));
       this["socketio"] = PL$41/*mainio*/;
       ;}),
-    "listen": (function(PL$48/*port*/){
+    "listen": (function(PL$50/*port*/){
     
       ;
-      return this["http"]["listen"](PL$48/*port*/);
+      return this["http"]["listen"](PL$50/*port*/);
       ;})
   }, [], PL$18/*inherited*/);
-  return res; })();PL$49/*Framework*/;
-  PL$1.resolve(PL$49/*Framework*/); return;
+  return res; })();PL$51/*Framework*/;
+  PL$1.resolve(PL$51/*Framework*/); return;
   PL$1.resolve(); return;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);
   ;}), PL$4/*catch rejected*/);

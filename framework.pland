@@ -173,6 +173,7 @@ class Framework {
     
     
     promiseland.addLocalFrameName("server");
+    promiseland.addLocalFrameName("serverNoAuth");
     
     
     
@@ -206,6 +207,9 @@ class Framework {
       console.log("Session: ", socket.handshake.session);
       
       var connection = new clientFrame.ConnectionBaseClass();
+      if (self.config.requireAuth){
+        connection.restrictLocalFrames = true;
+      };
       connection.send = (data){
         socket.emit("pl", data);
       };
@@ -218,6 +222,34 @@ class Framework {
       socket.on("pl", function(data){
         connection.data(data);
       });
+      
+      
+      var authConnection = new clientFrame.ConnectionBaseClass();
+      authConnection.restrictLocalFrames = true;
+      authConnection.addLocalFrameAccess("serverNoAuth");
+      
+      authConnection.session.setAuth = (parIsAuth){
+        if (parIsAuth){
+          connection.addLocalFrameAccess("server");
+        }else{
+          connection.removeLocalFrameAccess("server");
+        };
+      };
+      console.log(authConnection.session);
+      
+      authConnection.send = (data){
+        socket.emit("a", data);
+      };
+      clientFrame.newConnection(authConnection);
+      
+      socket.on("disconnect", function(){
+        authConnection.disconnect();
+      });
+      
+      socket.on("a", function(data){
+        authConnection.data(data);
+      });
+      
       
     });
     this.socketio = mainio;

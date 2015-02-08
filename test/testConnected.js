@@ -54,72 +54,144 @@ var __require = requireFun;
 var __Promise = promiseland.Promise;
 var Promise = promiseland.Promise;
 var classSystem = promiseland.classSystem;
-if (promiseland._hasModule({ hashStr: "95d2855001b8eaf73eab98e0b5b839bb" })){ return promiseland._getModule("95d2855001b8eaf73eab98e0b5b839bb"); };
-var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "95d2855001b8eaf73eab98e0b5b839bb", "module": PL$1, promising: true });
-var PL$5/*console*/;try{PL$5/*console*/ = console;}catch(e){};
-var PL$2 = (function(){
+if (promiseland._hasModule({ hashStr: "a2219ef2ef8c82d43dcf0636c2ce8721" })){ return promiseland._getModule("a2219ef2ef8c82d43dcf0636c2ce8721"); };
+var PL$2/*console*/;try{PL$2/*console*/ = console;}catch(e){};
+var PL$1 = (function(){
 "use strict";
-var PL$3/*promiseland exception catcher*/ = function(code){
-  return function(res){
-    try{ code(res); }catch(e){
-      PL$1.reject(e);
-    };
-  };
-};
-var PL$4/*catch rejected*/ = function(e){
-  PL$1.reject(e);
-};
-var PL$6/*testFun*/ = (function(f){
-promiseland.registerRemote("server", "95d2855001b8eaf73eab98e0b5b839bb", "PL$11", f, classSystem.getBuiltinType("var"));
+var PL$3/*testFun*/ = (function(f){
+promiseland.registerRemote("server", "a2219ef2ef8c82d43dcf0636c2ce8721", "PL$10", f, classSystem.getBuiltinType("var"));
 if (promiseland.profileHas("server")){
-return f;
+return function(){
+var i = 0; var l = arguments.length; var newArgs = [undefined];
+for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+return f.apply(this, newArgs);
+};
 }else{
 return function(){
-return promiseland.remoteExec("95d2855001b8eaf73eab98e0b5b839bb", "PL$11", arguments);
+return promiseland.remoteExec("a2219ef2ef8c82d43dcf0636c2ce8721", "PL$10", arguments);
 }
 };
-})(function (){
-var PL$7 = new __Promise();
-var PL$9/*promiseland exception catcher*/ = function(code){
+})(function (PL$4/*session*/, PL$5/*par1*/){
+var PL$6 = new __Promise();
+var PL$8/*promiseland exception catcher*/ = function(code){
   return function(res){
     try{ code(res); }catch(e){
-      PL$7.reject(e);
+      PL$6.reject(e);
     };
   };
 };
-var PL$10/*catch rejected*/ = function(e){
-  PL$7.reject(e);
+var PL$9/*catch rejected*/ = function(e){
+  PL$6.reject(e);
 };
-PL$9/*promiseland exception catcher*/(function(){
+PL$8/*promiseland exception catcher*/(function(){
 
   ;
-  PL$7.resolve("server Content"); return;
-  PL$7.resolve(); return;
-})();return PL$7;
+  PL$2/*console*/["log"](("par1: " + PL$5/*par1*/));
+  PL$2/*console*/["log"](PL$4/*session*/);
+  PL$6.resolve("server Content"); return;
+  PL$6.resolve(); return;
+})();return PL$6;
 });
-PL$3/*promiseland exception catcher*/(function(){
+var PL$11/*authFun*/ = (function(f){
+promiseland.registerRemote("serverNoAuth", "a2219ef2ef8c82d43dcf0636c2ce8721", "PL$16", f, classSystem.getBuiltinType("var"));
+if (promiseland.profileHas("serverNoAuth")){
+return function(){
+var i = 0; var l = arguments.length; var newArgs = [undefined];
+for(i = 0; i < l; ++i){ newArgs.push(arguments[i]); };
+return f.apply(this, newArgs);
+};
+}else{
+return function(){
+return promiseland.remoteExec("a2219ef2ef8c82d43dcf0636c2ce8721", "PL$16", arguments);
+}
+};
+})(function (PL$4/*session*/){
+var PL$12 = new __Promise();
+var PL$14/*promiseland exception catcher*/ = function(code){
+  return function(res){
+    try{ code(res); }catch(e){
+      PL$12.reject(e);
+    };
+  };
+};
+var PL$15/*catch rejected*/ = function(e){
+  PL$12.reject(e);
+};
+PL$14/*promiseland exception catcher*/(function(){
 
   ;
-  PL$5/*console*/["log"]("connected");
+  PL$2/*console*/["log"]("calling auth");
+  PL$2/*console*/["log"](PL$4/*session*/);
+  if((PL$4/*session*/ && PL$4/*session*/["setAuth"])){
+    PL$4/*session*/["setAuth"](true);
+  }else{
+  PL$2/*console*/["log"]("missing setAuth");
+  };
+  ;
+  PL$12.resolve(); return;
+})();return PL$12;
+});
+
+  ;
+  PL$2/*console*/["log"]("connected");
   /* function testFun (){} - hoisted */;
   ;
-  var PL$12 = new __Promise();
-  var PL$13 = new __Promise();
-  var PL$14/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$13.resolve(e); }; }; };
-  var PL$15 = function(e){ PL$13.resolve(e); };
-  PL$14/*try catch*/(function(){
-    PL$6/*testFun*/().then(PL$14/*try catch*/(function(PL$16){PL$5/*console*/["log"](PL$16);
-    PL$12.resolve();}), PL$15);
-  ;})();
-  PL$13.then(PL$3/*promiseland exception catcher*/(function(PL$17/*err*/){
-    PL$5/*console*/["log"](PL$17/*err*/);
-    PL$12.resolve();;}));
-  PL$12.then(PL$3/*promiseland exception catcher*/(function(){;
+  /* function authFun (){} - hoisted */;
   ;
-  PL$1.resolve(); return;}), PL$4/*catch rejected*/)
-})();return PL$1;
-})();
-;;
-return PL$1});
+  (function(){
+  if (!promiseland.profileHas("client")){
+  var p = new __Promise();
+  p.reject({id: 14, msg: "function does not execute in this frame."});
+  return p;
+  };
+  var PL$17 = new __Promise();
+  var PL$19/*promiseland exception catcher*/ = function(code){
+    return function(res){
+      try{ code(res); }catch(e){
+        PL$17.reject(e);
+      };
+    };
+  };
+  var PL$20/*catch rejected*/ = function(e){
+    PL$17.reject(e);
+  };
+  PL$19/*promiseland exception catcher*/(function(){
+  
+    ;
+    var PL$21 = new __Promise();
+    var PL$22 = new __Promise();
+    var PL$23/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$22.resolve(e); }; }; };
+    var PL$24 = function(e){ PL$22.resolve(e); };
+    PL$23/*try catch*/(function(){
+      PL$3/*testFun*/("xx1").then(PL$23/*try catch*/(function(PL$25){PL$2/*console*/["log"](PL$25);
+      PL$21.resolve();}), PL$24);
+    ;})();
+    PL$22.then(PL$19/*promiseland exception catcher*/(function(PL$26/*err*/){
+      PL$2/*console*/["log"]("failed --- ");
+      PL$2/*console*/["log"](PL$26/*err*/);
+      PL$21.resolve();;}));
+    PL$21.then(PL$19/*promiseland exception catcher*/(function(){;
+    ;
+    PL$2/*console*/["log"]("now calling auth");
+    PL$11/*authFun*/().then(PL$19/*promiseland exception catcher*/(function(PL$27){PL$27;
+    var PL$28 = new __Promise();
+    var PL$29 = new __Promise();
+    var PL$30/*try catch*/ = function(code){ return function(res){ try{code(res);}catch(e){ PL$29.resolve(e); }; }; };
+    var PL$31 = function(e){ PL$29.resolve(e); };
+    PL$30/*try catch*/(function(){
+      PL$3/*testFun*/("xx1").then(PL$30/*try catch*/(function(PL$32){PL$2/*console*/["log"](PL$32);
+      PL$28.resolve();}), PL$31);
+    ;})();
+    PL$29.then(PL$19/*promiseland exception catcher*/(function(PL$26/*err*/){
+      PL$2/*console*/["log"](PL$26/*err*/);
+      PL$28.resolve();;}));
+    PL$28.then(PL$19/*promiseland exception catcher*/(function(){;
+    ;
+    PL$17.resolve(); return;}), PL$20/*catch rejected*/)}), PL$20/*catch rejected*/);
+    ;}), PL$20/*catch rejected*/)
+  })();return PL$17;
+  })();
+  ;})();
+;return PL$1;
+});
 })();

@@ -3,6 +3,7 @@ try{
   var fw = new Fw({
     load: "test/test",
     loadOnConnect: "test/testConnected",
+    requireAuth: true,
     session: true,
     dirs: [{
       client: "/test",
