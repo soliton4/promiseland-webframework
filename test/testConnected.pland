@@ -1,0 +1,11 @@
+console.log("connected");
+
+testFun () frame "server" {
+  return "server Content";
+};
+
+try{
+  console.log(*testFun());
+}catch(err){
+  console.log(err);
+};

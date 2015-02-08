@@ -2,6 +2,8 @@ try{
   var Fw = require "./framework";
   var fw = new Fw({
     load: "test/test",
+    loadOnConnect: "test/testConnected",
+    session: true,
     dirs: [{
       client: "/test",
       server: __dirname + "/test/"
@@ -12,3 +14,6 @@ try{
 }catch(e){
   console.log(e);
 };
+
+//require "./test/test";
+require "./test/testConnected"; // module must be laoded on server to work

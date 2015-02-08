@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "4271a5758bf086dc28ae1192a546759f" })){ return promiseland._getModule("4271a5758bf086dc28ae1192a546759f"); };
+    if (promiseland._hasModule({ hashStr: "baaa3ace2ce629a5760ca61a9b6f640d" })){ return promiseland._getModule("baaa3ace2ce629a5760ca61a9b6f640d"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "4271a5758bf086dc28ae1192a546759f", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "baaa3ace2ce629a5760ca61a9b6f640d", "module": PL$1, promising: true });
 var PL$12/*__dirname*/;try{PL$12/*__dirname*/ = __dirname;}catch(e){};
 var PL$14/*console*/;try{PL$14/*console*/ = console;}catch(e){};
 var PL$2 = (function(){
@@ -94,6 +94,8 @@ PL$3/*promiseland exception catcher*/(function(){
     __requireFun("./framework").then(PL$7/*try catch*/(function(PL$10){PL$9/*Fw*/ = PL$10;
     PL$11/*fw*/ = new PL$9/*Fw*/({
       "load": "test/test",
+      "loadOnConnect": "test/testConnected",
+      "session": true,
       "dirs": [
         {
           "client": "/test",
@@ -113,7 +115,9 @@ PL$3/*promiseland exception catcher*/(function(){
     PL$5.resolve();;}));
   PL$5.then(PL$3/*promiseland exception catcher*/(function(){;
   ;
-  PL$1.resolve(); return;}), PL$4/*catch rejected*/)
+  __requireFun("./test/testConnected").then(PL$3/*promiseland exception catcher*/(function(PL$15){PL$15;
+  PL$1.resolve(); return;}), PL$4/*catch rejected*/);
+  ;}), PL$4/*catch rejected*/)
 })();return PL$1;
 })();
 ;;

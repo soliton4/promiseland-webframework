@@ -51,13 +51,13 @@
   defineFun(["promiseland"], function(promiseland){
 var __require = requireFun;
 
-if (promiseland._hasModule({ hashStr: "1a0881092c56aee0bb9b047576f84fe3" })){ return promiseland._getModule("1a0881092c56aee0bb9b047576f84fe3"); };
+if (promiseland._hasModule({ hashStr: "17a38487f70c7643abaeb20663bcf637" })){ return promiseland._getModule("17a38487f70c7643abaeb20663bcf637"); };
 var PL$2/*console*/;try{PL$2/*console*/ = console;}catch(e){};
 var PL$1 = (function(){
 "use strict";
 
   ;
-  PL$2/*console*/["log"]("test successful");
+  PL$2/*console*/["log"]("test module loaded");
   ;})();
 ;return PL$1;
 });

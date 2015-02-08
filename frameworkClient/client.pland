@@ -1,6 +1,12 @@
-promiseland.set("profile", "client");
 
-var ServerProfile = () {
+promiseland.addLocalFrameName("client");
+  
+var ServerFrame = class extends promiseland.FrameBaseClass {
+  name: "server"
+};
+
+
+/*var ServerProfile = () {
   this.name = (){
     return "server";
   };
@@ -8,9 +14,18 @@ var ServerProfile = () {
     return this.connection;
   };
 };
-ServerProfile.prototype = new promiseland.ProfileBaseClass();
+ServerProfile.prototype = new promiseland.ProfileBaseClass();*/
 
-var ServerConnection = (socket) {
+
+var serverFrame = new ServerFrame();
+promiseland.addFrame(serverFrame);
+    
+
+      
+
+
+
+/*var ServerConnection = (socket) {
   this.socket = socket;
   var self = this;
   socket.on("pl", (data){
@@ -24,19 +39,49 @@ ServerConnection.prototype = new promiseland.ConnectionBaseClass();
 
 var serverProfile = new ServerProfile();
 promiseland.addProfile(serverProfile);
+*/
+
+var serverConnection;
+
+var connectPs = new Promise;
 
 var socket = io.connect();
 socket.on("connect", function(){
-  var connection = new ServerConnection(socket);
+  
+  
+  serverConnection = new serverFrame.ConnectionBaseClass();
+  serverConnection.send = (data){
+    socket.emit("pl", data);
+  };
+  serverFrame.newConnection(serverConnection);
+
+  socket.on("disconnect", function(){
+    serverConnection.disconnect();
+  });
+
+  socket.on("pl", function(data){
+    serverConnection.data(data);
+  });
+  
+  try{
+    connectPs.resolve();
+  }catch(e){
+    // in case its already resolved
+  };
+
+  
+  /*var connection = new ServerConnection(socket);
   serverProfile.connection = connection;
-  serverProfile.emit("connection", connection);
+  serverProfile.emit("connection", connection);*/
   
 });
+
 socket.on("disconnect", function(){
-  serverProfile.connection.emit("disconnect");
-  serverProfile.connection = undefined;
+  //serverProfile.connection.emit("disconnect");
+  //serverProfile.connection = undefined;
+  serverConnection.disconnect();
 });
 
-return (f){
-  f();
+return {
+  connectPs: connectPs
 };
