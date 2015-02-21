@@ -64,9 +64,9 @@ var __requireFun = function(parModule){
         }, function(err){ returnPromise.reject(err); });
       }catch(e){ returnPromise.reject(e); };
       return returnPromise.promise;};
-    if (promiseland._hasModule({ hashStr: "595a706f7e3325e608e7d186729994f4" })){ return promiseland._getModule("595a706f7e3325e608e7d186729994f4"); };
+    if (promiseland._hasModule({ hashStr: "ab58d97e25e76c28a82a518055416f6b" })){ return promiseland._getModule("ab58d97e25e76c28a82a518055416f6b"); };
 var PL$1 = new __Promise();
-promiseland._registerModule({ hashStr: "595a706f7e3325e608e7d186729994f4", "module": PL$1, promising: true });
+promiseland._registerModule({ hashStr: "ab58d97e25e76c28a82a518055416f6b", "module": PL$1, promising: true });
 var PL$34/*JSON*/;try{PL$34/*JSON*/ = JSON;}catch(e){};
 var PL$35/*promiseland*/;try{PL$35/*promiseland*/ = promiseland;}catch(e){};
 var PL$36/*__dirname*/;try{PL$36/*__dirname*/ = __dirname;}catch(e){};
@@ -101,7 +101,7 @@ PL$3/*promiseland exception catcher*/(function(){
   __requireFun("socket.io").then(PL$3/*promiseland exception catcher*/(function(PL$12){PL$11/*socketIo*/ = PL$12;
   __requireFun("express-session").then(PL$3/*promiseland exception catcher*/(function(PL$14){PL$13/*expressSession*/ = PL$14;
   __requireFun("cookie-parser").then(PL$3/*promiseland exception catcher*/(function(PL$16){PL$15/*CookieParser*/ = PL$16;
-  PL$17/*htmlStr*/ = "<html>\n  <head>\n    {{css}}\n    <!-- socket.io -->\n      <script src='/socket.io/socket.io.js'></script>\n    <!-- require -->\n      <script src='/requirejs/require.js'></script>\n    <script>\n      require.config({{requirejsconfig}});\n    </script>\n    \n    <script>\n      require(['frameworkClient/client'], function(client){\n        {{require}};\n        client.connectPs.then(function(){\n          {{requireconnect}}\n        });\n      });\n    </script>\n    \n  </head>\n  <body>\n  </body>\n</html>";
+  PL$17/*htmlStr*/ = "<html>\n  <head>\n    {{css}}\n    <!-- socket.io -->\n      <script src='/socket.io/socket.io.js'></script>\n    <!-- require -->\n      <script src='/requirejs/require.js'></script>\n    <script>\n      require.config({{requirejsconfig}});\n    </script>\n    \n    <script>\n      require(['frameworkClient/client'], function(clientPs){\n        clientPs.then(function(client){\n          {{require}};\n          client.getConnectPs().then(function(){\n            {{requireconnect}}\n          });\n        });\n      });\n    </script>\n    \n  </head>\n  <body>\n  </body>\n</html>";
   PL$51/*Framework*/ = (function(){var PL$18/*inherited*/ = {};
   var res = promiseland.createClass({
     "constructor": (function(PL$19/*parConfig*/){

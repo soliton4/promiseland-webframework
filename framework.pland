@@ -18,10 +18,12 @@ var htmlStr = "<html>
     </script>
     
     <script>
-      require(['frameworkClient/client'], function(client){
-        {{require}};
-        client.connectPs.then(function(){
-          {{requireconnect}}
+      require(['frameworkClient/client'], function(clientPs){
+        clientPs.then(function(client){
+          {{require}};
+          client.getConnectPs().then(function(){
+            {{requireconnect}}
+          });
         });
       });
     </script>
