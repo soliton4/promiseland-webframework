@@ -5,16 +5,18 @@ var socketIo = require("socket.io");
 
 var expressSession = require "express-session";
 var CookieParser = require 'cookie-parser';
-
+//<script src='/requirejs/require.js'></script>
 var htmlStr = "<html>
   <head>
     {{css}}
     <!-- socket.io -->
       <script src='/socket.io/socket.io.js'></script>
     <!-- require -->
-      <script src='/requirejs/require.js'></script>
+      {{script}}
     <script>
-      require.config({{requirejsconfig}});
+      try{
+        require.config({{requirejsconfig}});
+      }catch(e){};
     </script>
     
     <script>
@@ -85,6 +87,17 @@ class Framework {
         };
       };
       s = s.replace("{{css}}", cssStr);
+      
+      var scriptStr = "";
+      if (self.config.addScript){
+        scriptStr += "<script>" + self.config.addScript + "</script>\n";
+      };
+      if (self.config.singleScriptFile){
+        scriptStr += "<script src='" + self.config.singleScriptFile + "'></script>";
+      }else{
+        scriptStr += "<script src='/requirejs/require.js'></script>\n";
+      };
+      s = s.replace("{{script}}", scriptStr);
       
       var loadStr = "";
       if (self.config.load && self.config.load.length){
@@ -169,6 +182,7 @@ class Framework {
     if (self.config.dirs){
       for (i = 0; i < self.config.dirs.length; ++i){
         var d = self.config.dirs[i];
+        console.log("using: " + d.server + " as: " + d.client);
         this.app.use(d.client, express["static"](d.server));
       };
     };
