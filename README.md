@@ -41,6 +41,12 @@ the configuration options are:
   - load  
     string / array  
     the module / modules to load on client side
+  - loadOnConnect  
+    string / array  
+    the module / modules to load on client side as soon as the first successful connection is established. This is useful if you want to use the frame "server" right away.
+  - singleScriptFile  
+    string  
+    if given, this script will be included instead of requirejs. Make sure you include a amd loader in the file. You can use this to load builds created with r.js or other build systems.  
   - dirs  
     array  
     directories served to the client. express["static"] is used to serve them. each entry in the array is a object containing a "server" and a "client" property giving the path to the directory on each side.  
